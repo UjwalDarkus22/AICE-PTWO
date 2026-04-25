@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AICE Psychology — Core Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0c;
+  --paper: #f5f2eb;
+  --cream: #ede9de;
+  --warm-mid: #c8bfa8;
+  --accent: #c94f2a;
+  --accent-light: #f0dbd4;
+  --sage: #4a6741;
+  --sage-light: #d6e2d3;
+  --navy: #1e2d4a;
+  --navy-light: #d0d8e8;
+  --gold: #b8860b;
+  --gold-light: #f0e6c0;
+  --muted: #7a7468;
+  --border: #d4cfc4;
+  --card-bg: #faf8f3;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: rgba(245,242,235,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-search {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 6px 14px;
+}
+.nav-search input {
+  border: none; background: none;
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--ink); width: 180px; outline: none;
+}
+.nav-search input::placeholder { color: var(--muted); }
+.nav-search svg { color: var(--muted); flex-shrink: 0; }
+
+/* ---- HERO ---- */
+.hero {
+  padding: 140px 2.5rem 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: end;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.hero-title em { color: var(--accent); font-style: italic; }
+.hero-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.hero-stats {
+  display: flex; gap: 2.5rem;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.hero-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.hero-visual {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+}
+.hero-visual-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+}
+.approach-wheel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.aw-item {
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  text-decoration: none;
+}
+.aw-item:hover { transform: translateY(-2px); }
+.aw-item-label { font-size: 12px; font-weight: 500; }
+.aw-item-count { font-size: 11px; opacity: 0.8; font-family: var(--font-mono); }
+.aw-cog { background: #e8e6f8; color: #3c348a; }
+.aw-bio { background: var(--sage-light); color: #2d4429; }
+.aw-soc { background: var(--navy-light); color: #1a2a40; }
+.aw-learn { background: var(--gold-light); color: #6b4e00; }
+
+/* ---- FILTERS ---- */
+.filters-section {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  padding: 0 2.5rem;
+  position: sticky;
+  top: 60px;
+  z-index: 90;
+}
+.filters-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 52px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.filters-inner::-webkit-scrollbar { display: none; }
+.filter-chip {
+  white-space: nowrap;
+  padding: 5px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.filter-chip:hover { border-color: var(--ink); color: var(--ink); }
+.filter-chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.filter-chip.active.c-cog { background: #3c348a; border-color: #3c348a; }
+.filter-chip.active.c-bio { background: var(--sage); border-color: var(--sage); }
+.filter-chip.active.c-soc { background: var(--navy); border-color: var(--navy); }
+.filter-chip.active.c-learn { background: var(--gold); border-color: var(--gold); }
+.filter-sep { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+.results-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* ---- MAIN GRID ---- */
+.main { padding: 3rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+.studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+/* ---- STUDY CARD ---- */
+.study-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.study-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  border-color: var(--warm-mid);
+}
+.card-accent-bar { height: 4px; }
+.card-accent-cog { background: linear-gradient(90deg, #5346c8, #8b82e0); }
+.card-accent-bio { background: linear-gradient(90deg, #4a6741, #7fa672); }
+.card-accent-soc { background: linear-gradient(90deg, #1e2d4a, #4a6ea0); }
+.card-accent-learn { background: linear-gradient(90deg, #b8860b, #daa630); }
+
+.card-body { padding: 1.25rem; flex: 1; }
+.card-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.card-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.badge-cog { background: #e8e6f8; color: #3c348a; }
+.badge-bio { background: var(--sage-light); color: #2d4429; }
+.badge-soc { background: var(--navy-light); color: #1a2a40; }
+.badge-learn { background: var(--gold-light); color: #6b4e00; }
+.card-year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.card-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.card-topic {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+.card-aim {
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-footer {
+  padding: 10px 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--cream);
+}
+.card-method { font-size: 11px; color: var(--muted); }
+.card-expand-btn {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ---- MODAL OVERLAY ---- */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(15,14,12,0.6);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--paper);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-close {
+  position: sticky; top: 1.5rem; left: 100%;
+  width: 36px; height: 36px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  color: var(--muted);
+  margin-right: 1.5rem;
+  transition: all 0.2s;
+  z-index: 10;
+}
+.modal-close:hover { background: var(--ink); color: var(--paper); }
+
+.modal-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-eyebrow {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+}
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.modal-subtitle { font-size: 15px; color: var(--muted); }
+
+.modal-body { padding: 2rem 2.5rem; }
+
+.modal-section { margin-bottom: 2rem; }
+.modal-section-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-section p { font-size: 14px; line-height: 1.7; }
+
+.qf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+.qf-box {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.qf-box-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 4px; font-family: var(--font-mono); }
+.qf-box-val { font-size: 13px; font-weight: 500; line-height: 1.4; }
+
+.pills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill-item {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.findings-list { list-style: none; }
+.findings-list li {
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 6px 0 6px 18px;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+}
+.findings-list li:last-child { border-bottom: none; }
+.findings-list li::before {
+  content: "→";
+  position: absolute; left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.eval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.eval-box {
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.eval-box-title { font-weight: 500; margin-bottom: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.eval-str { background: #e8f4e4; border: 1px solid #b4d4ae; color: #1e4018; }
+.eval-str .eval-box-title { color: #2d6028; }
+.eval-wk { background: #fae8e4; border: 1px solid #f0b8ae; color: #5c1e10; }
+.eval-wk .eval-box-title { color: #8a2510; }
+.eval-str li, .eval-wk li { margin-bottom: 4px; padding-left: 14px; position: relative; list-style: none; }
+.eval-str li::before { content: "+"; position: absolute; left: 0; font-weight: 700; }
+.eval-wk li::before { content: "−"; position: absolute; left: 0; font-weight: 700; }
+
+/* ---- QUICK REF TABLE ---- */
+#reference {
+  border-top: 1px solid var(--border);
+  padding: 4rem 2.5rem;
+  background: var(--cream);
+}
+.ref-inner { max-width: 1100px; margin: 0 auto; }
+.ref-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.ref-sub { color: var(--muted); font-size: 14px; margin-bottom: 2rem; }
+.ref-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ref-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+}
+.ref-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table tr:hover td { background: rgba(200,191,168,0.2); }
+.ref-table td:first-child { font-weight: 500; font-family: var(--font-display); }
+
+/* ---- TIPS ---- */
+#tips {
+  padding: 4rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.tips-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+.tips-sub { color: var(--muted); font-size: 14px; margin-bottom: 2rem; }
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.tip-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+.tip-icon { font-size: 24px; margin-bottom: 10px; }
+.tip-heading { font-weight: 500; font-size: 15px; margin-bottom: 6px; }
+.tip-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ---- FOOTER ---- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+footer span { color: var(--accent); }
+
+/* ---- EMPTY STATE ---- */
+.empty-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  color: var(--muted);
+  display: none;
+  grid-column: 1/-1;
+}
+.empty-state.show { display: block; }
+.empty-title { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+
+/* ---- VOCAB ---- */
+#vocab {
+  padding: 4rem 2.5rem;
+  background: var(--ink);
+  color: var(--paper);
+}
+.vocab-inner { max-width: 1100px; margin: 0 auto; }
+.vocab-header { margin-bottom: 2rem; }
+.vocab-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--paper);
+}
+.vocab-sub { color: var(--warm-mid); font-size: 14px; margin-bottom: 1.5rem; }
+.vocab-controls {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.vocab-search-wrap {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 24px;
+  padding: 7px 14px;
+  flex: 1; min-width: 200px;
+}
+.vocab-search-wrap input {
+  border: none; background: none;
+  font-family: var(--font-body); font-size: 13px;
+  color: var(--paper); width: 100%; outline: none;
+}
+.vocab-search-wrap input::placeholder { color: var(--warm-mid); }
+.vocab-cat-btn {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: var(--warm-mid);
+  font-family: var(--font-body);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.vocab-cat-btn:hover { border-color: rgba(255,255,255,0.5); color: var(--paper); }
+.vocab-cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.vocab-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--warm-mid);
+  margin-left: auto;
+}
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+.vocab-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.vocab-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.28);
+  transform: translateY(-2px);
+}
+.vocab-card-hint {
+  position: absolute;
+  bottom: 10px; right: 14px;
+  font-size: 10px;
+  color: rgba(200,191,168,0.4);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+.vocab-term {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+  padding-right: 2rem;
+}
+.vocab-cat-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.vtag-research { background: rgba(201,79,42,0.25); color: #f0a080; }
+.vtag-cog { background: rgba(83,74,183,0.3); color: #b0a8f0; }
+.vtag-bio { background: rgba(74,103,65,0.35); color: #9ecf90; }
+.vtag-soc { background: rgba(30,45,74,0.6); color: #90b0d8; }
+.vtag-learn { background: rgba(184,134,11,0.3); color: #e8c860; }
+.vtag-ethics { background: rgba(140,40,40,0.3); color: #f0a0a0; }
+.vtag-stats { background: rgba(40,100,100,0.35); color: #80d0c8; }
+.vocab-preview {
+  font-size: 12px;
+  color: rgba(200,191,168,0.55);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.vocab-no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--warm-mid);
+  font-size: 14px;
+  grid-column: 1/-1;
+  display: none;
+}
+
+/* ---- VOCAB MODAL ---- */
+.vocab-modal-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(10,9,8,0.75);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.vocab-modal-overlay.open { display: flex; }
+.vocab-modal {
+  background: #1a1915;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  padding: 2rem 2.5rem 2.5rem;
+  position: relative;
+  animation: vmodalIn 0.22s ease;
+}
+@keyframes vmodalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.vocab-modal-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 16px; color: var(--warm-mid);
+  transition: all 0.2s;
+}
+.vocab-modal-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.vocab-modal-tag { margin-bottom: 1rem; }
+.vocab-modal-term {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+.vocab-modal-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-mid);
+  margin-bottom: 0.5rem;
+}
+.vocab-modal-def {
+  font-size: 15px;
+  color: var(--warm-mid);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.vocab-modal-example {
+  background: rgba(255,255,255,0.05);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1rem;
+  font-size: 13px;
+  color: rgba(200,191,168,0.75);
+  line-height: 1.6;
+  font-style: italic;
+}
+.vocab-modal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.vocab-nav-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: var(--warm-mid);
+  font-family: var(--font-body);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.vocab-nav-btn:hover:not(:disabled) { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+.vocab-nav-btn:disabled { opacity: 0.25; cursor: default; }
+.vocab-modal-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(200,191,168,0.5);
+}
+
+/* ---- MOBILE ---- */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-visual { display: none; }
+  .nav-links { display: none; }
+  .nav-search input { width: 120px; }
+  .qf-grid { grid-template-columns: 1fr 1fr; }
+  .eval-grid { grid-template-columns: 1fr; }
+  .modal { border-radius: 16px 16px 0 0; margin-top: auto; align-self: flex-end; max-height: 85vh; }
+  .modal-overlay { align-items: flex-end; padding: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AICE <span>Psych</span></div>
+  <div class="nav-links">
+    <a href="#studies">Studies</a>
+    <a href="#reference">Quick Ref</a>
+    <a href="#vocab">Vocab</a>
+    <a href="#tips">Exam Tips</a>
+  </div>
+  <div class="nav-search">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input id="globalSearch" type="text" placeholder="Search studies…" autocomplete="off">
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Cambridge AICE · Psychology 9990</div>
+    <h1 class="hero-title">Master the<br><em>Core Studies.</em><br>Ace the Exam.</h1>
+    <p class="hero-desc">Every core study — aims, method, sample, findings, and evaluation — organized for A-level success. Click any study card to explore the full detail.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">13</div>
+        <div class="hero-stat-label">Core Studies</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Approaches</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">70+</div>
+        <div class="hero-stat-label">Vocab Terms</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Exam Ready</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-title">Study by approach</div>
+    <div class="approach-wheel">
+      <a class="aw-item aw-cog" href="#studies" onclick="setFilter('cog')">
+        <div class="aw-item-label">Cognitive</div>
+        <div class="aw-item-count">3 studies</div>
+      </a>
+      <a class="aw-item aw-bio" href="#studies" onclick="setFilter('bio')">
+        <div class="aw-item-label">Biological</div>
+        <div class="aw-item-count">4 studies</div>
+      </a>
+      <a class="aw-item aw-soc" href="#studies" onclick="setFilter('soc')">
+        <div class="aw-item-label">Social</div>
+        <div class="aw-item-count">2 studies</div>
+      </a>
+      <a class="aw-item aw-learn" href="#studies" onclick="setFilter('learn')">
+        <div class="aw-item-label">Learning</div>
+        <div class="aw-item-count">3 studies</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<div class="filters-section" id="studies">
+  <div class="filters-inner">
+    <button class="filter-chip active" data-filter="all" onclick="setFilter('all')">All Studies</button>
+    <div class="filter-sep"></div>
+    <button class="filter-chip c-cog" data-filter="cog" onclick="setFilter('cog')">Cognitive</button>
+    <button class="filter-chip c-bio" data-filter="bio" onclick="setFilter('bio')">Biological</button>
+    <button class="filter-chip c-soc" data-filter="soc" onclick="setFilter('soc')">Social</button>
+    <button class="filter-chip c-learn" data-filter="learn" onclick="setFilter('learn')">Learning</button>
+    <span class="results-count" id="resultsCount">13 studies</span>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<main class="main">
+  <div class="studies-grid" id="studiesGrid">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-title">No studies found</div>
+      <p>Try a different search or filter.</p>
+    </div>
+  </div>
+</main>
+
+<!-- QUICK REFERENCE -->
+<section id="reference">
+  <div class="ref-inner">
+    <div class="ref-title">Quick Reference</div>
+    <div class="ref-sub">All 13 core studies at a glance — method, design, and data type</div>
+    <table class="ref-table">
+      <thead>
+        <tr>
+          <th>Study</th>
+          <th>Approach</th>
+          <th>Method</th>
+          <th>Design</th>
+          <th>Sample</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody id="refTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- EXAM TIPS -->
+<section id="tips">
+  <div class="tips-title">Exam Tips</div>
+  <div class="tips-sub">Key strategies for answering AICE Psychology questions</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📐</div>
+      <div class="tip-heading">Always define before evaluating</div>
+      <div class="tip-text">When asked to evaluate a study, define the key concept first (e.g. ecological validity, reliability) before applying it to the study.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">⚖️</div>
+      <div class="tip-heading">Strengths AND weaknesses</div>
+      <div class="tip-text">For evaluation questions, give both sides. Link each point directly back to the study — don't make generic claims.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <div class="tip-heading">IV → DV linkage</div>
+      <div class="tip-text">Always be able to state the IV and DV precisely for each study. Know how each was operationalized (measured).</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔬</div>
+      <div class="tip-heading">Know the controls</div>
+      <div class="tip-text">Examiners love asking about controls. For each study, know 2–3 specific control measures and why they matter.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🧬</div>
+      <div class="tip-heading">Nature vs. nurture links</div>
+      <div class="tip-text">Hassett, Baron-Cohen, and Holzel all connect to this debate. Be ready to explain which side each study supports and why.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📊</div>
+      <div class="tip-heading">Quant vs. qual data</div>
+      <div class="tip-text">Know whether each study produced quantitative, qualitative, or both types of data — and be able to explain the difference and give an example from the study.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🏛️</div>
+      <div class="tip-heading">Ethics checklist</div>
+      <div class="tip-text">For every study, run through: informed consent, deception, right to withdraw, harm, debriefing, confidentiality. Milgram and Piliavin break almost all of them.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🌍</div>
+      <div class="tip-heading">Generalisation matters</div>
+      <div class="tip-text">Discuss sample composition (age, sex, culture, size) when evaluating generalisability. A sample of 9 adults (Dement) or one child (Saavedra) is very limited.</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOCAB -->
+<section id="vocab">
+  <div class="vocab-inner">
+    <div class="vocab-header">
+      <div class="vocab-title">Essential Vocabulary</div>
+      <div class="vocab-sub">Key terms you must know — definitions + exam context. Filter by category or search.</div>
+      <div class="vocab-controls">
+        <div class="vocab-search-wrap">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input id="vocabSearch" type="text" placeholder="Search terms or definitions…" autocomplete="off">
+        </div>
+        <button class="vocab-cat-btn active" data-vcat="all">All</button>
+        <button class="vocab-cat-btn" data-vcat="research">Research Methods</button>
+        <button class="vocab-cat-btn" data-vcat="ethics">Ethics</button>
+        <button class="vocab-cat-btn" data-vcat="cog">Cognitive</button>
+        <button class="vocab-cat-btn" data-vcat="bio">Biological</button>
+        <button class="vocab-cat-btn" data-vcat="soc">Social</button>
+        <button class="vocab-cat-btn" data-vcat="learn">Learning</button>
+        <button class="vocab-cat-btn" data-vcat="stats">Stats & Data</button>
+        <span class="vocab-count" id="vocabCount"></span>
+      </div>
+    </div>
+    <div class="vocab-grid" id="vocabGrid">
+      <div class="vocab-no-results" id="vocabNoResults">No terms match your search.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>AICE Psychology 9990 · Cambridge International · Core Studies Reference Guide · <span>Study hard.</span></p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- VOCAB MODAL -->
+<div class="vocab-modal-overlay" id="vocabModalOverlay" onclick="closeVocabModal(event)">
+  <div class="vocab-modal" id="vocabModal">
+    <button class="vocab-modal-close" onclick="closeVocabModalBtn()">✕</button>
+    <div id="vocabModalContent"></div>
+  </div>
+</div>
+
+<script>
+const STUDIES = [
+  {
+    id:"andrade",name:"Andrade (2010)",topic:"Doodling & Concentration",
+    approach:"cog",approachLabel:"Cognitive",year:"2010",
+    aim:"To show that doodling aids concentration — specifically that it helps participants accurately monitor a telephone message and improves subsequent recall of message content.",
+    method:"Laboratory experiment","design":"Independent Measures",
+    sample:"40 paid members of a participants panel (MRC unit, Cambridge). Age 18–55, mainly female. 20 per group.",
+    iv:"Whether participants doodled (shading printed shapes) or did not while listening to a recorded telephone message.",
+    dv:"(1) Party-goer names correctly noted. (2) Surprise recall of places mentioned in the message.",
+    procedure:"Participants listened to a dull, monotone 2.5-minute recorded telephone message about a party. Experimental group shaded shapes on paper; control group did not. All noted party-goer names. A surprise place-recall test followed (order counterbalanced). Plausible mishearings counted correct; false alarms subtracted.",
+    controls:["Used immediately after another experiment to reduce alertness","Told task would be dull to reduce motivation to focus","Doodling presented as 'to alleviate boredom' — not the focus","Monotone voice at 227 words/min","Shapes pre-printed (not free doodling)","Recall order counterbalanced"],
+    findings:["Doodling group recalled significantly more information","Mean shapes shaded: 36.3 (range 3–110)","Mean names correctly recalled: 7.8 (SD 0.4) for doodlers","One false alarm recorded in the doodling group","Doodling appeared to prevent daydreaming without diverting attention from the primary task"],
+    strengths:["Well-controlled lab experiment","Use of counterbalancing reduces order effects","Clear operationalization of both IV and DV"],
+    weaknesses:["Low ecological validity — artificial shading task ≠ natural doodling","Mainly female sample limits generalization","No long-term follow-up on concentration benefits"],
+    dataType:"Quantitative (number of correct recalls, false alarms)"
+  },
+  {
+    id:"holzel",name:"Holzel et al. (2011)",topic:"Mindfulness & Brain Structure",
+    approach:"bio",approachLabel:"Biological",year:"2011",
+    aim:"To investigate the potential long-term effect of a mindfulness-based stress reduction (MBSR) program on grey matter density in key brain regions.",
+    method:"Quasi-experiment (longitudinal)","design":"Repeated Measures (with control group)",
+    sample:"16 MBSR participants (6 male, 10 female; mean age 38) + 17 controls (11 male, 6 female; mean age 39). All healthy, right-handed, no recent meditation experience.",
+    iv:"Participation in the 8-week MBSR program vs. no intervention (control group).",
+    dv:"Grey matter density in hippocampus and insula measured by MRI. Also FFMQ self-report scores.",
+    procedure:"MBSR group attended 8 weekly 2.5-hour sessions (body scan, mindful yoga, sitting meditation) plus one 6.5-hr day in week 6, with 45-min daily home practice. MRI scans taken 2 weeks before and 2 weeks after the program. Controls scanned 2 months apart. Voxel-based morphometry used for brain analysis.",
+    controls:["All participants right-handed","No prescription medication","No meditation in prior 6 months","Informed consent obtained","MRI protocol standardized for all participants"],
+    findings:["Significant increase in grey matter in the hippocampus for MBSR group","Changes also in posterior cingulate cortex, temporo-parietal junction, and cerebellum","Control group showed no changes","FFMQ scores increased for MBSR group, confirming self-reported mindfulness gains"],
+    strengths:["Objective MRI measurement — beyond self-report","Longitudinal design tracks change across time","Control group allows direct comparison"],
+    weaknesses:["Very small N (16 experimental) — hard to generalize","Self-selected sample — motivated meditators may differ from general population","Cannot control what participants did outside sessions"],
+    dataType:"Quantitative (MRI grey matter measurements, FFMQ scores)"
+  },
+  {
+    id:"baroncohen",name:"Baron-Cohen et al. (1997)",topic:"Theory of Mind & Autism",
+    approach:"cog",approachLabel:"Cognitive",year:"1997",
+    aim:"(1) Determine if people with HFA/Asperger's can read emotions from eyes. (2) Test if AQ score inversely correlates with eyes test score. (3) Test if females show better Theory of Mind than males.",
+    method:"Quasi-experiment","design":"Independent Measures (+ matched pairs for Group 4)",
+    sample:"16 HFA/Asperger's adults (13M/3F); 50 neurotypical controls; 10 Tourette's syndrome adults; 10 IQ-matched neurotypical adults.",
+    iv:"Diagnostic group (HFA/Asperger's vs. neurotypical vs. Tourette's). Also sex of participant.",
+    dv:"Score on revised 'Reading the Mind in the Eyes' test (28 photos, 4 choices each). AQ score.",
+    procedure:"Participants viewed 28 B&W photos of eye regions only. For each, chose 1 of 4 mental state descriptors. Stimuli validated by 8 independent raters (5/8 agreement required). Neurotypical group also completed gender-recognition control task. AQ questionnaire administered.",
+    controls:["Stimuli validated by independent raters","Gender-recognition control task used","IQ-matching for Group 4","Standardized B&W cropped photos — no contextual information"],
+    findings:["HFA/Asperger's group scored significantly lower on eyes test than controls","No significant difference between neurotypical controls and Tourette's group","Neurotypical females scored higher than males on the eyes test","Inverse correlation found between AQ score and eyes test score"],
+    strengths:["Objective standardized measure — not just self-report","Multiple control groups (Tourette's, IQ-matched) add rigor","Improved methodology over original 2-choice version"],
+    weaknesses:["Small HFA/Asperger's sample (n=16)","Decontextualized photos may not reflect real-world emotion-reading","All stimuli from one cultural group — low cross-cultural validity"],
+    dataType:"Quantitative (eyes test scores, AQ scores, correlation data)"
+  },
+  {
+    id:"dement",name:"Dement & Kleitman (1957)",topic:"REM Sleep & Dreaming",
+    approach:"bio",approachLabel:"Biological",year:"1957",
+    aim:"To determine the relationship between rapid eye movement (REM) sleep and dreaming.",
+    method:"Laboratory experiment","design":"Repeated Measures",
+    sample:"9 adults (7 male, 2 female). 5 studied intensively; 4 studied minimally to confirm findings.",
+    iv:"Sleep stage (REM vs. NREM) at time of awakening.",
+    dv:"(1) Dream recall (yes/no). (2) Estimated duration of dream vs. actual REM period length. (3) Eye movement direction compared to dream content.",
+    procedure:"Participants slept in a dark lab. EEG electrodes on skull (2–3) and near eyes (2) measured brain activity and eye movements. Woken by doorbell during REM or NREM. Reported dream status and content into recorder. Duration: woken after 5 or 15 min REM and asked to estimate. Direction: eye movement pattern compared to dream content (e.g. horizontal = watching tennis).",
+    controls:["No researcher contact with participant during sleep — eliminates experimenter bias","One participant told he'd only be woken in REM (demand characteristic control)","Caffeine/alcohol intake monitored","Standardized waking stimulus (doorbell)"],
+    findings:["79% of REM awakenings produced dream recall; only 7% of NREM awakenings did","Participants accurately distinguished between 5-min and 15-min REM periods","Eye movement direction correlated with dream content","REM strongly associated with vivid, visual dreaming"],
+    strengths:["Objective physiological measures (EEG/EOG)","Repeated measures design controls individual differences","High internal validity from controlled lab setting"],
+    weaknesses:["Very small sample (n=9) — cannot generalize widely","Lab setting reduces ecological validity (artificial sleep conditions)","Demand characteristics: participants knew they'd be woken to report dreams"],
+    dataType:"Quantitative (% dream recall, duration estimates) and Qualitative (dream content)"
+  },
+  {
+    id:"fagen",name:"Fagen et al.",topic:"Elephant Learning",
+    approach:"learn",approachLabel:"Learning",year:"2014",
+    aim:"To determine the effectiveness of secondary positive reinforcement (SPR) in training free-contact elephants in Nepal to voluntarily perform a trunk wash for tuberculosis testing.",
+    method:"Field experiment / naturalistic observation","design":"No design (case-study style, progress tracked over time)",
+    sample:"5 female elephants at a stable in Nepal. 4 juveniles (5–7 yrs); 1 adult (~50s). Selected for docility, non-pregnancy, and mahout willingness. None had prior SPR experience.",
+    iv:"The SPR training protocol (whistle + banana). Progress tracked over training sessions.",
+    dv:"Whether elephants successfully completed all 5 stages of the trunk wash behavioral chain.",
+    procedure:"Training in morning and afternoon stall sessions. Primary reinforcer: chopped bananas. Secondary reinforcer: whistle. Techniques: (1) Pairing whistle with banana, (2) Capture: reward spontaneous correct behavior, (3) Lure: tempt into position with food, (4) Shaping: reward incremental approximations. Behavioral chain: trunk in hand → saline instilled → trunk lifted → fluid held → blow out. Monosyllabic verbal cues added after correct performance. Mahouts present but instructed not to signal elephants.",
+    controls:["Mahouts instructed to remain silent during sessions","Consistent morning and afternoon session schedule","No elephant went more than 2 days without training","Primary reinforcer only given at end of full correct behavioral chain"],
+    findings:["All 5 elephants successfully learned the full trunk wash behavior","Behavioral chaining allowed a complex multi-step sequence to be trained","SPR was effective as an alternative to punishment-based methods","Elephants showed voluntary participation — could indicate unwillingness by turning away"],
+    strengths:["Practical application — real veterinary/conservation benefit","Demonstrates operant conditioning principles in a large non-human species","Welfare-friendly alternative to traditional aversive methods"],
+    weaknesses:["No control group — cannot compare SPR to other methods","Very small N (5 elephants) — cannot generalize across species or settings","Individual mahout–elephant relationships may confound training outcomes"],
+    dataType:"Qualitative (behavioral observations) and some quantitative (sessions to criterion)"
+  },
+  {
+    id:"hassett",name:"Hassett et al. (2008)",topic:"Monkey Toy Preference",
+    approach:"bio",approachLabel:"Biological",year:"2008",
+    aim:"To investigate whether sex differences in toy preference among Rhesus monkeys are due to biological factors rather than socialization.",
+    method:"Natural field experiment","design":"Independent Groups",
+    sample:"82 Rhesus monkeys (61 female, 21 male) from Yerkes National Primate Research Center, Emory University. Pre-coded for social rank and age.",
+    iv:"(a) Sex of monkey (b) Category of toy: wheeled (masculine) vs. plush (feminine) (c) Social rank and age (natural IVs).",
+    dv:"(a) Frequency of playing with each toy (b) Duration of play (c) Magnitude of preference score.",
+    procedure:"Monkeys housed in 25m × 25m outdoor compound. One wheeled and one plush toy placed 10m apart in outdoor area. 7 trials (each 25 min), toy placement counterbalanced. Two video cameras on each toy; 2 observers noted identity, sex, and behavior using a behavioral checklist.",
+    controls:["Toy placement counterbalanced across trials","Two independent observers","Social rank and age pre-coded for analysis","Data on toy category only — not individual toys"],
+    findings:["Males showed statistical preference for wheeled toys (frequency 9.77 vs. 2.06)","Females showed no statistical preference between toy types (6.96 vs. 7.97)","Males spent significantly more time with wheeled toys (5 min vs. 30 sec)","Females showed no statistical duration difference between toy types","Findings mirror human sex differences, suggesting biological basis for toy preference"],
+    strengths:["Monkeys cannot be socially conditioned for gender toy preference — strong nature argument","Large sample by primate research standards","Naturalistic compound setting with high realism"],
+    weaknesses:["Monkey–toy interaction differs from human play","Defining wheeled/plush as masculine/feminine is an assumption","Observer bias possible even with behavioral checklist"],
+    dataType:"Quantitative (frequency, duration, preference magnitude scores)"
+  },
+  {
+    id:"milgram",name:"Milgram (1963)",topic:"Obedience to Authority",
+    approach:"soc",approachLabel:"Social",year:"1963",
+    aim:"To test whether US citizens in the 1960s would obey an authority figure's instructions to administer electric shocks to another person, challenging the 'Germans are different' hypothesis.",
+    method:"Laboratory experiment with observations and interviews","design":"None (single condition)",
+    sample:"40 male volunteers from New Haven, age 20–50, various occupations. Self-selected via newspaper advertisement.",
+    iv:"Strictly, no IV — all participants experienced one condition. (Shock level is sometimes cited.)",
+    dv:"Voltage level at which participant refused to continue, or whether they reached 450V.",
+    procedure:"'Teacher' (participant) and 'learner' (stooge Mr. Wallace) drew lots — rigged so participant always taught. Learner strapped in adjacent room with electrodes. Teacher gave word pairs; wrong answers = electric shock, increasing by 15V increments up to 450V. Learner gave scripted protests at set voltages (at 300V: pounds on wall; beyond: silence). If teacher hesitated, experimenter gave 4 standardized prods. Followed by interview and full debrief.",
+    controls:["Same 4 prods used for every participant in the same order","Stooge (Mr. Wallace) gave identical scripted responses at each voltage","One-way mirror for observation; many sessions recorded on video","Procedure was identical for every participant"],
+    findings:["All 40 participants gave shocks to 300V","26/40 (65%) went to the maximum 450V","Extreme stress observed: sweating, trembling, 3 participants had seizures","Mean 'pain experienced by learner' rating: 13.42/14 (most believed shocks were real)","Post-interview: most were relieved the learner was unharmed; many glad to participate"],
+    strengths:["Standardized procedure — high reliability and replicability","Self-selecting sample reduced experimenter selection bias","Debrief conducted — participants informed of real purpose and condition of learner","Stooge acted identically throughout — well-controlled for experimenter effects"],
+    weaknesses:["Major ethical issues: deception, psychological harm, limited right to withdraw","All-male, American, one-city sample — low generalizability","Prestigious Yale setting may have elevated obedience beyond typical situations","Cannot determine how much obedience was situational vs. dispositional"],
+    dataType:"Quantitative (% reaching each voltage level) and Qualitative (observations, interview quotes)"
+  },
+  {
+    id:"perry",name:"Perry et al.",topic:"Oxytocin & Personal Space",
+    approach:"bio",approachLabel:"Biological",year:"2010",
+    aim:"To test the differential effect of the social hormone oxytocin (OT) on personal space preference in relation to a person's level of empathy.",
+    method:"Laboratory experiment","design":"Mixed (IMD for empathy; RMD for treatment and condition)",
+    sample:"54 male undergraduates at University of Haifa (Israel), age 19–32. Split: High Empathy (n=20, IRI ≥40) and Low Empathy (n=20, IRI <33). 14 middle scorers excluded.",
+    iv:"IV1: Empathy level (high vs. low — IMD). IV2: Treatment (OT vs. placebo nasal spray — RMD). IV3 (Exp.2): Relationship type (stranger, authority, friend, ball — RMD).",
+    dv:"Preferred interpersonal distance — % of CID remaining when participant stopped the animation (Exp.1); preferred room with chair distances (Exp.2).",
+    procedure:"Participants completed IRI online. Two sessions 1 week apart (same day/time). OT or placebo administered via nasal dropper (double-blind). Waited 45 min with nature magazines. Experiment 1 (CID): computer animation of figure moving toward participant — spacebar pressed to stop. Experiment 2 (room choice): preferred chair distance. Order counterbalanced.",
+    controls:["Double-blind: neither participant nor experimenter knew treatment","1-week session gap at same time/day — controls circadian rhythms","Order counterbalanced across experiments","No history of social disorders in any participant"],
+    findings:["Low empathy + OT: preferred significantly greater interpersonal distance from strangers","High empathy + OT: no significant or slight reduction in preferred distance","OT produced differential effects depending on individual empathy level","Preferred distance varied by relationship type (stranger > authority > friend)"],
+    strengths:["Double-blind design eliminates expectation effects","Counterbalanced experiment order","Objective, computer-measured DV (% distance remaining)"],
+    weaknesses:["All-male sample — cannot generalize to females","WEIRD sample (university students, Israel) — cultural specificity","OT's precise neural mechanisms still debated","14 middle-IRI scorers excluded — potential data loss bias"],
+    dataType:"Quantitative (% CID remaining, room choice data)"
+  },
+  {
+    id:"piliavin",name:"Piliavin, Rodin & Piliavin (1969)",topic:"Bystander Behavior",
+    approach:"soc",approachLabel:"Social",year:"1969",
+    aim:"(1) Study bystander behaviour outside the lab in a realistic setting. (2) Investigate the effect of victim responsibility, victim race, model presence, and group size on helping.",
+    method:"Field experiment with observations","design":"Independent Groups",
+    sample:"~4,450 unsolicited subway passengers. Average 43 per carriage (8 in 'critical' area). ~45% Black, ~55% White. No informed consent.",
+    iv:"(1) Victim responsibility: cane (ill) vs. drunk. (2) Victim race: Black vs. White. (3) Model presence: 70s vs. 150s, critical vs. adjacent area. (4) Number of bystanders.",
+    dv:"(1) Time to first spontaneous help. (2) Total number of passengers who helped. Also: qualitative passenger comments.",
+    procedure:"4 research teams (2 female observers + 2 male actors). 70 sec after train left station, male victim staggered and fell, lying still eyes open. Drunk condition: smelled of alcohol, carried a bottle in a paper bag. Cane condition: carried a cane. 6–8 trials per day, 11am–3pm, for 10 weeks. Model helper intervened at 70 or 150 sec.",
+    controls:["Same 7.5-min gap between stations used consistently","All male confederates identically dressed in casual clothes","Standardized collapse behavior for victim","Female observers recorded results independently from victim"],
+    findings:["Ill (cane) victim helped 95% of the time without model intervention","Drunk victim helped 50% of the time","78% of victims received spontaneous help overall; 60% by more than one person","Most helpers were male","In drunk condition, Black victims slightly less likely to be helped","No strong diffusion of responsibility effect — larger groups slightly more likely to help","Model at 70s more effective than at 150s"],
+    strengths:["High ecological validity — real subway, real passengers, real behavior","No demand characteristics — participants unaware of study","Large total sample across many trials"],
+    weaknesses:["No informed consent or right to withdraw — serious ethical breach","Extraneous variables uncontrollable (positioning in carriage, visibility)","Cannot confirm all passengers noticed the event","Observer positioning may have introduced bias"],
+    dataType:"Quantitative (% helping, response time) and Qualitative (passenger comments)"
+  },
+  {
+    id:"pozzulo",name:"Pozzulo et al.",topic:"Children's Eyewitness Accuracy",
+    approach:"cog",approachLabel:"Cognitive",year:"2010",
+    aim:"(1) Investigate if cognitive and/or social factors affect correct identification and false positive responses in lineups. (2) Investigate the role of target familiarity in these responses.",
+    method:"Laboratory experiment","design":"Mixed (3 IVs with different designs)",
+    sample:"59 children aged 4–7 (21F/38M, mean age 4.98) from 3 private schools in Eastern Ontario. 53 adults aged 17–30 (36F/17M, mean age 20.54) from a university participant pool.",
+    iv:"(1) Age: children vs. adults (IMD). (2) Lineup type: target-present vs. absent (RMD). (3) Cognitive demand: cartoon (low) vs. human face (high) (RMD).",
+    dv:"Accuracy of identification (target-present lineups) and accuracy of rejection (target-absent lineups). False positive rate.",
+    procedure:"All participants shown 6-second video clips of either a human target (performing everyday task) or cartoon character (Dora/Diego). Then shown 5-photo array (target + 4 foils, or 5 foils in absent condition). Children pointed to a photo or a black silhouette ('not there'). Adults recorded answers on a sheet. All photos were B&W, same size, cropped to face/neck/shoulders.",
+    controls:["All photos same size and B&W to minimize extraneous variation","Foils selected by 3 independent raters for similarity to target","Demographic questionnaire confirmed cartoon familiarity","Parents gave written consent for child participants"],
+    findings:["Children and adults showed comparable correct identification in target-present lineups","Children showed significantly higher false positive rates in target-absent lineups","Cartoon familiarity did not eliminate children's false positive tendencies","Social factors (compliance with authority, desire not to disappoint) likely drove children's errors"],
+    strengths:["Mixed design allows multiple research questions to be answered","Use of familiar cartoons separates cognitive from social explanations","Controlled materials: matched foils, standardized stimuli"],
+    weaknesses:["Lab setting differs from real police lineup context","Private school sample may not represent all children","Wide age range (4–7) — developmental differences within child group not analyzed separately"],
+    dataType:"Quantitative (% correct identification, % false positive, % correct rejection)"
+  },
+  {
+    id:"bandura",name:"Bandura et al. (1961)",topic:"Observational Learning & Aggression",
+    approach:"learn",approachLabel:"Learning",year:"1961",
+    aim:"To show that observed aggression is imitated. Four hypotheses: (1) observed behaviour is imitated, (2) non-observed behaviour cannot be imitated, (3) boys more likely to imitate aggression, (4) same-sex model imitated more.",
+    method:"Laboratory experiment with controlled observation","design":"Independent Measures (with matched groups)",
+    sample:"72 children (36 boys, 36 girls), aged 37–69 months, Stanford University nursery. Matched for pre-existing aggression levels.",
+    iv:"IV1: Condition — aggressive / non-aggressive / no model. IV2: Sex of model. IV3: Sex of child.",
+    dv:"Number of imitative and non-imitative aggressive behaviours in 240 five-second observation intervals over 20 minutes.",
+    procedure:"Step 1: Pre-test aggression rated by experimenter and teacher (5-point scale). Step 2: Child with model in Room 1 — aggressive model enacted scripted bobo doll sequence (sit on/punch nose, mallet hits, throws, kicks with verbal accompaniment). Non-aggressive model played quietly with Tinker Toys. 10 minutes. Step 3: Room 2 — mild aggression arousal (attractive toys withdrawn). Step 4: Room 3 — 20 min observation via one-way mirror with aggressive and non-aggressive toys including dart guns.",
+    controls:["Aggressive model's actions scripted identically for all","Identical room layouts every time","Pre-existing aggression matched across groups","Inter-rater reliability ~0.9 correlation","240 response units standardized (5-sec intervals × 20 min)"],
+    findings:["Aggressive group showed far more aggression than non-aggressive or control groups","Boys showed more physical aggression when with male model","Girls showed more verbal aggression when with female model","Children in all groups showed novel aggressive gun play — not directly modelled","Verbal comments: 'That man is a good fighter, like daddy'"],
+    strengths:["Matched groups control pre-existing aggression differences","High inter-rater reliability (r ≈ 0.9)","Standardized procedure allows replication"],
+    weaknesses:["Low ecological validity — hitting an inflatable doll ≠ real-world aggression","Demand characteristics — children may have performed knowing they were watched","Sample limited to one nursery — narrow population","Cannot establish long-term effects of observing aggression on behaviour"],
+    dataType:"Quantitative (frequency of aggressive behaviours) and Qualitative (verbal comments)"
+  },
+  {
+    id:"saavedra",name:"Saavedra & Silverman (2002)",topic:"Button Phobia (Classical Conditioning)",
+    approach:"learn",approachLabel:"Learning",year:"2002",
+    aim:"(1) Investigate the causes of a button phobia in a child. (2) Treat the phobia by targeting both disgust and fear responses using evaluative learning principles.",
+    method:"Case study with interviews, structured rating scales, and observation","design":"N/A (single participant)",
+    sample:"Single participant: 9-year-old Hispanic-American boy enrolled in the Child Anxiety and Phobia Program at Florida International University. Met DSM-IV criteria for specific phobia of buttons.",
+    iv:"N/A (case study). Therapy phase (behavioral exposure vs. cognitive restructuring) tracks change over time.",
+    dv:"Distress rating on 0–8 'feelings thermometer.' Symptom severity via Child-Parent Anxiety Disorders Interview Schedule.",
+    procedure:"Assessment: structured interview (yes/no symptoms, impairment, feelings thermometer). History: buttons fell on him from a bowl in art class at age 5 (evaluative conditioning). Phase 1 (4 sessions): In vivo graded exposure hierarchy (distress 2–8). Mother gave positive reinforcement for success. 30 min alone + 20 min with mother. Phase 2 (7 sessions): Imaginal exposure + cognitive restructuring (replacing disgust cognitions). Follow-up at 6 and 12 months.",
+    controls:["Standardized DSM-IV diagnostic interview","Consistent 30+20 min session structure","Hierarchy established by child using feelings thermometer","Follow-up at both 6 and 12 months to confirm lasting change"],
+    findings:["Phase 1: boy completed all in vivo tasks but distress increased across sessions 2–4","Phase 2: imaginal exposure + cognitive restructuring reduced distress from 8 → 5 → 3","Distress went from 7 → 4 → 3 in hugging-with-buttons imaginal session","At 6 and 12 months: no longer met DSM-IV phobia criteria; wore buttons on school uniform daily"],
+    strengths:["Real clinical case with practical therapeutic application","Combination of behavioral and cognitive techniques demonstrates evaluative conditioning","Objective 0–8 scale provides quantitative data","Long-term 12-month follow-up shows lasting treatment effect"],
+    weaknesses:["Single participant — impossible to generalize","No control condition — cannot rule out natural remission over time","Treating clinicians also conducted assessment — researcher bias risk","Therapeutic attention itself may be partly responsible for improvement (Hawthorne effect)"],
+    dataType:"Quantitative (distress ratings) and Qualitative (interview responses, observations)"
+  }
+];
+
+let activeFilter = "all";
+let searchQuery = "";
+
+const approachColors = { cog: "badge-cog", bio: "badge-bio", soc: "badge-soc", learn: "badge-learn" };
+const accentBars = { cog: "card-accent-cog", bio: "card-accent-bio", soc: "card-accent-soc", learn: "card-accent-learn" };
+
+function getFiltered() {
+  const q = searchQuery.toLowerCase();
+  return STUDIES.filter(s => {
+    const matchFilter = activeFilter === "all" || s.approach === activeFilter;
+    if (!matchFilter) return false;
+    if (!q) return true;
+    return [s.name, s.topic, s.aim, s.method, s.sample, s.findings.join(" "), s.procedure].some(t => t.toLowerCase().includes(q));
+  });
+}
+
+function renderGrid() {
+  const grid = document.getElementById("studiesGrid");
+  const empty = document.getElementById("emptyState");
+  const countEl = document.getElementById("resultsCount");
+  const filtered = getFiltered();
+  countEl.textContent = filtered.length + " stud" + (filtered.length === 1 ? "y" : "ies");
+
+  // Remove existing cards but keep empty state
+  Array.from(grid.children).forEach(c => { if (!c.classList.contains("empty-state")) c.remove(); });
+
+  if (filtered.length === 0) {
+    empty.classList.add("show");
+    return;
+  }
+  empty.classList.remove("show");
+
+  filtered.forEach(s => {
+    const card = document.createElement("div");
+    card.className = "study-card";
+    card.innerHTML = `
+      <div class="card-accent-bar ${accentBars[s.approach]}"></div>
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-badge ${approachColors[s.approach]}">${s.approachLabel}</span>
+          <span class="card-year">${s.year}</span>
+        </div>
+        <div class="card-name">${s.name}</div>
+        <div class="card-topic">${s.topic}</div>
+        <div class="card-aim">${s.aim}</div>
+      </div>
+      <div class="card-footer">
+        <span class="card-method">${s.method.split(" ").slice(0,2).join(" ")}</span>
+        <span class="card-expand-btn">View full study →</span>
+      </div>
+    `;
+    card.addEventListener("click", () => openModal(s.id));
+    grid.insertBefore(card, empty);
+  });
+}
+
+function openModal(id) {
+  const s = STUDIES.find(x => x.id === id);
+  if (!s) return;
+  const modalContent = document.getElementById("modalContent");
+
+  const evalStrList = s.strengths.map(x => `<li>${x}</li>`).join("");
+  const evalWkList = s.weaknesses.map(x => `<li>${x}</li>`).join("");
+
+  modalContent.innerHTML = `
+    <div class="modal-header">
+      <div class="modal-eyebrow">
+        <span class="card-badge ${approachColors[s.approach]}">${s.approachLabel}</span>
+        <span style="font-size:12px;color:var(--muted);font-family:var(--font-mono)">${s.year}</span>
+      </div>
+      <div class="modal-title">${s.name}</div>
+      <div class="modal-subtitle">${s.topic}</div>
+    </div>
+    <div class="modal-body">
+      <div class="qf-grid">
+        <div class="qf-box"><div class="qf-box-label">Method</div><div class="qf-box-val">${s.method}</div></div>
+        <div class="qf-box"><div class="qf-box-label">Design</div><div class="qf-box-val">${s.design}</div></div>
+        <div class="qf-box"><div class="qf-box-label">Data type</div><div class="qf-box-val">${s.dataType.split(" ")[0]}</div></div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Aim</div>
+        <p>${s.aim}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Sample</div>
+        <p>${s.sample}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Independent Variable (IV)</div>
+        <p>${s.iv}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Dependent Variable (DV)</div>
+        <p>${s.dv}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Procedure</div>
+        <p>${s.procedure}</p>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Key Controls</div>
+        <div class="pills-list">${s.controls.map(c => `<span class="pill-item">${c}</span>`).join("")}</div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Key Findings</div>
+        <ul class="findings-list">${s.findings.map(f => `<li>${f}</li>`).join("")}</ul>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Evaluation</div>
+        <div class="eval-grid">
+          <div class="eval-box eval-str">
+            <div class="eval-box-title">Strengths</div>
+            <ul>${evalStrList}</ul>
+          </div>
+          <div class="eval-box eval-wk">
+            <div class="eval-box-title">Weaknesses</div>
+            <ul>${evalWkList}</ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Data collected</div>
+        <p>${s.dataType}</p>
+      </div>
+    </div>
+  `;
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById("modalOverlay")) closeModalBtn();
+}
+function closeModalBtn() {
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalBtn(); });
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll(".filter-chip").forEach(b => {
+    b.classList.toggle("active", b.dataset.filter === f);
+  });
+  renderGrid();
+}
+
+document.getElementById("globalSearch").addEventListener("input", function() {
+  searchQuery = this.value;
+  renderGrid();
+});
+
+// Reference table
+function renderRefTable() {
+  const tbody = document.getElementById("refTableBody");
+  tbody.innerHTML = STUDIES.map(s => `
+    <tr style="cursor:pointer" onclick="openModal('${s.id}')">
+      <td>${s.name}</td>
+      <td><span class="card-badge ${approachColors[s.approach]}">${s.approachLabel}</span></td>
+      <td>${s.method}</td>
+      <td>${s.design}</td>
+      <td style="color:var(--muted);font-size:12px">${s.sample.substring(0,60)}…</td>
+      <td style="font-size:12px">${s.dataType.split(" (")[0]}</td>
+    </tr>
+  `).join("");
+}
+
+renderGrid();
+renderRefTable();
+
+// ---- VOCAB ----
+const VOCAB = [
+  // Research Methods
+  { term:"Independent Variable (IV)", cat:"research", def:"The variable the researcher deliberately changes or manipulates to observe its effect on another variable.", example:"e.g. In Milgram: the IV was the command to give electric shocks (though technically no true IV existed)." },
+  { term:"Dependent Variable (DV)", cat:"research", def:"The variable that is measured by the researcher — it 'depends' on the IV.", example:"e.g. In Andrade: the DV was the number of names correctly recalled." },
+  { term:"Operationalization", cat:"research", def:"Defining a variable in a specific, measurable way so it can be tested. Turns abstract concepts into concrete measures.", example:"e.g. 'Aggression' was operationalized in Bandura as the number of aggressive acts in 240 five-second intervals." },
+  { term:"Hypothesis", cat:"research", def:"A testable, falsifiable prediction about the relationship between two or more variables, stated before a study begins.", example:"e.g. 'There will be a significant association between REM sleep and dreaming' (Dement & Kleitman)." },
+  { term:"Null Hypothesis", cat:"research", def:"The prediction that there is no relationship or difference between variables — any results are due to chance.", example:"e.g. 'There will be no significant difference in recall between doodlers and non-doodlers.'" },
+  { term:"Laboratory Experiment", cat:"research", def:"A study conducted in a controlled, artificial environment where the researcher manipulates an IV and measures a DV, with extraneous variables controlled.", example:"e.g. Andrade, Milgram, Bandura — all lab experiments." },
+  { term:"Field Experiment", cat:"research", def:"An experiment conducted in a real-world, natural environment. The IV is still manipulated but participants are unaware they're in a study.", example:"e.g. Piliavin — conducted on a New York subway train." },
+  { term:"Quasi-Experiment", cat:"research", def:"A study where the IV is not directly manipulated by the researcher (e.g. pre-existing group differences like age or diagnosis).", example:"e.g. Baron-Cohen compared HFA/Asperger's vs. neurotypical groups — the IV (diagnosis) was not manipulated." },
+  { term:"Case Study", cat:"research", def:"An in-depth investigation of a single individual, group, or event using multiple methods (interviews, observation, tests).", example:"e.g. Saavedra & Silverman studied one 9-year-old boy with button phobia." },
+  { term:"Independent Measures Design (IMD)", cat:"research", def:"Each participant takes part in only one condition of the IV. Avoids order effects but requires more participants and may suffer from individual differences.", example:"e.g. Andrade: different people in the doodling vs. no-doodling group." },
+  { term:"Repeated Measures Design (RMD)", cat:"research", def:"The same participants take part in all conditions of the IV. Controls individual differences but risks order effects.", example:"e.g. Dement & Kleitman: same participants woken in both REM and NREM." },
+  { term:"Matched Pairs Design", cat:"research", def:"Different participants in each condition but matched on key variables (e.g. age, IQ, pre-existing aggression). Reduces individual differences without order effects.", example:"e.g. Bandura matched children for pre-existing aggression levels." },
+  { term:"Mixed Design", cat:"research", def:"A study that uses both independent measures and repeated measures, depending on which IV is being examined.", example:"e.g. Perry et al: empathy level was IMD; treatment (OT vs. placebo) was RMD." },
+  { term:"Counterbalancing", cat:"research", def:"A technique to control order effects in repeated measures designs by varying the order in which conditions are experienced across participants (e.g. ABBA or random order).", example:"e.g. Andrade counterbalanced the order of the two recall tests." },
+  { term:"Control Group", cat:"research", def:"A group of participants who do not receive the experimental treatment — used as a baseline for comparison.", example:"e.g. In Holzel, the control group did not do the MBSR program and received no MRI-detectable changes." },
+  { term:"Extraneous Variable", cat:"research", def:"Any variable other than the IV that could affect the DV. If not controlled, it becomes a confounding variable.", example:"e.g. In Dement: caffeine or alcohol intake could affect sleep quality." },
+  { term:"Confounding Variable", cat:"research", def:"An extraneous variable that has systematically varied alongside the IV, making it impossible to determine which caused the change in the DV.", example:"e.g. If one group of Bandura's children already watched more TV, their aggression might reflect media exposure, not modelling." },
+  { term:"Demand Characteristics", cat:"research", def:"Cues in the study that hint at the aim — leading participants to change their behaviour to match what they think is expected.", example:"e.g. In Dement, knowing they'd be woken to report dreams might have made participants more likely to say they were dreaming." },
+  { term:"Experimenter Effects", cat:"research", def:"Unintentional influences of the researcher's behaviour, expectations, or presence on participants' responses.", example:"e.g. Dement eliminated this by having no researcher contact with sleeping participants." },
+  { term:"Double-Blind Procedure", cat:"research", def:"Neither the participant nor the researcher knows which condition the participant is in. Controls both demand characteristics and experimenter effects.", example:"e.g. Perry et al: neither participant nor experimenter knew whether OT or placebo was administered." },
+  { term:"Single-Blind Procedure", cat:"research", def:"The participant does not know which condition they are in, but the researcher does. Controls demand characteristics but not experimenter effects.", example:"e.g. Participants in Milgram didn't know the learner was a confederate." },
+  { term:"Standardization", cat:"research", def:"Using the same instructions, materials, and procedures for all participants to ensure results are comparable and the study can be replicated.", example:"e.g. Milgram used identical standardized 'prods' for every participant." },
+  { term:"Pilot Study", cat:"research", def:"A small-scale trial of a study run before the main research to test and refine procedures, materials, or questions.", example:"e.g. Baron-Cohen tested stimuli on independent raters before finalizing the Eyes Test." },
+  { term:"Ecological Validity", cat:"research", def:"The degree to which findings from a study can be generalized to real-world settings and everyday life.", example:"e.g. Piliavin has high ecological validity — the subway is a real, everyday environment. Andrade's lab has low ecological validity." },
+  { term:"Internal Validity", cat:"research", def:"The extent to which changes in the DV can be confidently attributed to the IV, and not to extraneous or confounding variables.", example:"e.g. Dement's controlled lab achieved high internal validity by eliminating contact between researcher and participant." },
+  { term:"Reliability", cat:"research", def:"The consistency of a measure — whether the same results are produced each time the study is repeated or the same person is assessed.", example:"e.g. Bandura used two observers with inter-rater reliability ~0.9 to ensure consistent scoring." },
+  { term:"Inter-rater Reliability", cat:"research", def:"The degree of agreement between two or more observers who independently rate or code the same data.", example:"e.g. Bandura: correlation of ~0.9 between two observers recording children's aggression." },
+  { term:"Validity", cat:"research", def:"Whether a study truly measures what it claims to measure.", example:"e.g. Baron-Cohen questioned whether the original 2-choice Eyes Test was a valid measure of Theory of Mind due to ceiling effects." },
+  { term:"Generalizability", cat:"research", def:"The extent to which findings from a study can be applied to other people, places, or situations beyond the original sample.", example:"e.g. Dement's sample of 9 adults has very low generalizability." },
+  { term:"Sampling", cat:"research", def:"The process of selecting participants from a target population for a study.", example:"" },
+  { term:"Opportunity Sample", cat:"research", def:"Participants are chosen based on whoever is available and willing at the time of the study.", example:"e.g. Piliavin used subway passengers — whoever happened to be on the train." },
+  { term:"Volunteer / Self-Selecting Sample", cat:"research", def:"Participants volunteer themselves, often in response to an advertisement.", example:"e.g. Milgram's participants responded to a newspaper ad." },
+  { term:"Opportunity Sample", cat:"research", def:"Participants selected because they are conveniently available to the researcher.", example:"e.g. Andrade used participants already at the MRC research unit." },
+  { term:"Quota Sampling", cat:"research", def:"The researcher sets quotas to ensure certain subgroups are equally represented in the sample.", example:"e.g. Bandura used quota sampling to achieve 12 participants in each sub-condition." },
+  { term:"Quantitative Data", cat:"stats", def:"Numerical data that can be counted or measured. Allows statistical analysis.", example:"e.g. Milgram: percentage of participants reaching each voltage level." },
+  { term:"Qualitative Data", cat:"stats", def:"Non-numerical data describing experiences, thoughts, or feelings. Rich in detail but harder to analyze statistically.", example:"e.g. Milgram: participants' comments and interview responses during debrief." },
+  { term:"Mean", cat:"stats", def:"The arithmetic average — add all values and divide by the number of values. Sensitive to outliers.", example:"e.g. Andrade: mean number of shaded shapes = 36.3." },
+  { term:"Standard Deviation (SD)", cat:"stats", def:"A measure of how spread out scores are around the mean. A small SD means scores are clustered close to the mean.", example:"e.g. Andrade: SD of 0.4 for name recall — very consistent scores." },
+  { term:"Correlation", cat:"stats", def:"A statistical measure of the relationship between two variables. Ranges from -1 (perfect negative) to +1 (perfect positive). Does not imply causation.", example:"e.g. Baron-Cohen found an inverse (negative) correlation between AQ score and Eyes Test score." },
+  { term:"Statistical Significance", cat:"stats", def:"A result is statistically significant if it is unlikely to have occurred by chance (typically p < 0.05, meaning less than 5% probability of chance).", example:"e.g. Hassett found male monkeys' preference for wheeled toys was statistically significant." },
+  { term:"Ceiling Effect", cat:"stats", def:"When a test is so easy that most participants score near the maximum, leaving no room to show differences.", example:"e.g. Baron-Cohen noted a ceiling effect in his original 2-choice Eyes Test — everyone scored too high." },
+  { term:"Likert Scale", cat:"stats", def:"A psychometric scale where respondents rate their agreement with a statement on a numbered scale (typically 1–5 or 1–7).", example:"e.g. Holzel used a 5-point Likert scale in the FFMQ questionnaire." },
+  // Ethics
+  { term:"Informed Consent", cat:"ethics", def:"Participants must be given enough information about the study to make a free and informed decision about whether to participate.", example:"e.g. Holzel: all participants gave informed consent before MRI scans. Milgram: violated — participants were deceived about the study's true purpose." },
+  { term:"Deception", cat:"ethics", def:"Misleading participants about the true nature or purpose of a study. Only acceptable if there is no alternative and it causes minimal harm.", example:"e.g. Milgram deceived participants about the electric shocks being real and the learner being a stooge." },
+  { term:"Right to Withdraw", cat:"ethics", def:"Participants must be able to leave the study at any time without penalty, even after they have been paid.", example:"e.g. Milgram undermined this with prods like 'You have no other choice, you must go on.'" },
+  { term:"Protection from Harm", cat:"ethics", def:"Researchers must protect participants from physical or psychological harm greater than what they'd encounter in everyday life.", example:"e.g. Milgram caused extreme stress (seizures, trembling) — widely criticised for violating this principle." },
+  { term:"Debriefing", cat:"ethics", def:"A post-study discussion in which participants are told the true aims of the study, any deception is revealed, and they are ensured they are okay.", example:"e.g. Milgram debriefed all participants and introduced them to the unharmed 'learner'." },
+  { term:"Confidentiality", cat:"ethics", def:"Participants' data must be kept private and not linked to their identities in published research.", example:"e.g. Milgram maintained participant confidentiality in published results." },
+  { term:"Anonymity", cat:"ethics", def:"Participants cannot be identified from the data collected, either during or after the study.", example:"e.g. In Piliavin, passengers' identities were not recorded." },
+  { term:"BPS Guidelines", cat:"ethics", def:"The British Psychological Society's code of ethics that governs how psychological research must be conducted to protect participants.", example:"e.g. Milgram's study would not be approved under modern BPS guidelines due to deception and harm." },
+  // Cognitive
+  { term:"Theory of Mind (ToM)", cat:"cog", def:"The ability to understand that others have different thoughts, beliefs, desires, and emotions to one's own — also called 'mentalizing' or 'mind-reading'.", example:"e.g. Baron-Cohen showed that people with HFA/Asperger's score lower on ToM tasks (the Eyes Test)." },
+  { term:"Cognitive Approach", cat:"cog", def:"The psychological perspective that focuses on internal mental processes — how we perceive, store, process, and retrieve information.", example:"e.g. Andrade (attention), Baron-Cohen (ToM), and Pozzulo (memory) are all cognitive studies." },
+  { term:"Concentration / Attention", cat:"cog", def:"The ability to focus cognitive resources on a specific task or stimulus while ignoring distractions.", example:"e.g. Andrade studied how doodling affects concurrent attention during a monotonous telephone message." },
+  { term:"Recall", cat:"cog", def:"Retrieving information from memory without being given the original stimulus — a measure of memory performance.", example:"e.g. In Andrade, both groups had to recall party-goer names and places from the telephone message." },
+  { term:"Concurrent Tasks", cat:"cog", def:"Two tasks performed at the same time that draw on different cognitive resources (so one does not necessarily interfere with the other).", example:"e.g. Andrade: doodling (visual-motor) while listening (auditory) — these use different resources, so doodling can aid rather than harm listening." },
+  { term:"False Positive Response", cat:"cog", def:"Incorrectly identifying something as present when it is actually absent — in eyewitness research, picking an innocent person from a lineup.", example:"e.g. Pozzulo found children made significantly more false positive responses in target-absent lineups." },
+  { term:"Eyewitness Testimony", cat:"cog", def:"A legal account given by a person who witnessed a crime or event. Its accuracy is affected by many cognitive and social factors.", example:"e.g. Pozzulo investigated factors affecting the reliability of children's eyewitness identification." },
+  { term:"Target-Absent Lineup", cat:"cog", def:"A lineup in which the actual suspect/culprit is not present — only foils/distractors. A correct response is to say 'not there'.", example:"e.g. Pozzulo's key finding was that children made more errors in target-absent lineups than adults." },
+  { term:"Target-Present Lineup", cat:"cog", def:"A lineup in which the actual suspect/culprit is included alongside foils. A correct response is a positive identification.", example:"e.g. Pozzulo found children and adults performed similarly in target-present lineups." },
+  { term:"Daydreaming", cat:"cog", def:"A shift in attention away from the immediate task toward internal thoughts, often occurring during boring or repetitive activities.", example:"e.g. Andrade proposed that doodling prevents daydreaming by occupying low-level cognitive resources." },
+  // Biological
+  { term:"Biological Approach", cat:"bio", def:"The psychological perspective that explains behaviour in terms of biological structures, processes, genetics, hormones, and the brain.", example:"e.g. Holzel, Dement & Kleitman, Hassett, and Perry et al. all use a biological approach." },
+  { term:"Neuroplasticity", cat:"bio", def:"The brain's ability to change its structure and function in response to experience, learning, or injury throughout life.", example:"e.g. Holzel's finding that MBSR increased hippocampal grey matter is evidence of neuroplasticity." },
+  { term:"Grey Matter", cat:"bio", def:"The darker tissue of the brain and spinal cord consisting mainly of nerve cell bodies. Associated with processing and cognition.", example:"e.g. Holzel measured changes in grey matter density in the hippocampus following MBSR training." },
+  { term:"Hippocampus", cat:"bio", def:"A brain region in the medial temporal lobe associated with learning, memory consolidation, and spatial navigation. Also involved in emotional regulation.", example:"e.g. Holzel found increased grey matter density in the hippocampus after MBSR." },
+  { term:"Amygdala", cat:"bio", def:"A brain region involved in processing emotions — particularly fear, threat, and anxiety — and in forming emotional memories.", example:"e.g. Holzel proposed that reduced amygdala activity may accompany mindfulness-related stress reduction." },
+  { term:"Insula", cat:"bio", def:"A region of cortex ('island of Reil') located deep in the lateral sulcus, involved in interoception (awareness of body state), pain, taste, and self-awareness.", example:"e.g. Holzel's ROIs included the insula — one of the two most-affected areas in prior mindfulness research." },
+  { term:"MRI (Magnetic Resonance Imaging)", cat:"bio", def:"A brain scanning technique that uses magnetic fields and radio waves to produce detailed images of brain structure (not activity).", example:"e.g. Holzel used structural MRI and voxel-based morphometry to measure grey matter density." },
+  { term:"EEG (Electroencephalograph)", cat:"bio", def:"A device that records electrical activity in the brain via electrodes on the scalp. Measures brain wave patterns associated with different states.", example:"e.g. Dement & Kleitman used EEG to track sleep stages (alpha, beta, delta waves)." },
+  { term:"REM Sleep", cat:"bio", def:"Rapid Eye Movement sleep — a stage of sleep characterized by fast, desynchronized brain waves, rapid eye movements, and vivid dreaming. Accounts for ~20% of sleep.", example:"e.g. Dement found that 79% of REM awakenings produced dream recall." },
+  { term:"NREM Sleep", cat:"bio", def:"Non-Rapid Eye Movement sleep — Stages 1–4, characterized by progressively slower brain waves. Not associated with vivid dreaming.", example:"e.g. Dement found only 7% of NREM awakenings produced dream recall." },
+  { term:"Oxytocin (OT)", cat:"bio", def:"A neuropeptide ('social hormone') produced in the hypothalamus, associated with bonding, trust, empathy, and social behavior. Can have differential effects depending on individual differences.", example:"e.g. Perry et al found OT increased preferred interpersonal distance in low-empathy individuals." },
+  { term:"Interpersonal Distance", cat:"bio", def:"The physical distance a person prefers to maintain between themselves and others during social interaction — influenced by relationship type, culture, and hormones.", example:"e.g. Perry measured preferred CID (comfortable interpersonal distance) using computer animations." },
+  { term:"Empathy", cat:"bio", def:"The ability to understand and share the feelings, thoughts, or perspectives of another person.", example:"e.g. Perry used the Interpersonal Reactivity Index (IRI) to divide participants into high and low empathy groups." },
+  { term:"Localization of Function", cat:"bio", def:"The idea that specific areas of the brain are responsible for specific cognitive or behavioural functions.", example:"e.g. Holzel's study supports localization — mindfulness training specifically changed the hippocampus and insula." },
+  { term:"Nature vs. Nurture", cat:"bio", def:"The debate over whether behaviour is primarily determined by genetics/biology (nature) or by environment/learning/experience (nurture).", example:"e.g. Hassett supports nature — Rhesus monkeys show sex-typed toy preference without socialization." },
+  { term:"Mindfulness", cat:"bio", def:"The practice of deliberately paying attention to present-moment experience with a compassionate, non-judgmental stance.", example:"e.g. Holzel defined it as 'awareness of present moment experience with a compassionate, non-judgmental stance.'" },
+  { term:"MBSR (Mindfulness-Based Stress Reduction)", cat:"bio", def:"An 8-week structured program developed by Jon Kabat-Zinn involving meditation, yoga, and body scan practices to reduce stress.", example:"e.g. Holzel's experimental participants underwent an 8-week MBSR course." },
+  // Social
+  { term:"Social Approach", cat:"soc", def:"The psychological perspective that explains behaviour in terms of social influences, including the presence of others, group dynamics, authority, and culture.", example:"e.g. Milgram (obedience) and Piliavin (bystander behaviour) are social approach studies." },
+  { term:"Obedience", cat:"soc", def:"Complying with the direct orders or commands of an authority figure.", example:"e.g. Milgram found that 65% of participants obeyed authority and administered the maximum 450V shock." },
+  { term:"Authority Figure", cat:"soc", def:"A person perceived to have social power or legitimacy — such as a scientist, police officer, or teacher — whose instructions carry special weight.", example:"e.g. In Milgram, the experimenter in a grey lab coat at Yale University was the authority figure." },
+  { term:"Agentic State", cat:"soc", def:"A mental state in which a person sees themselves as an agent executing the wishes of an authority figure, relinquishing personal responsibility for their actions.", example:"e.g. Milgram used this to explain why participants continued shocking — they felt they were acting for the experimenter, not for themselves." },
+  { term:"Autonomous State", cat:"soc", def:"A state in which a person acts according to their own values and takes personal responsibility for their actions — the opposite of the agentic state.", example:"e.g. Participants who refused to continue in Milgram were acting in an autonomous state." },
+  { term:"Diffusion of Responsibility", cat:"soc", def:"The tendency for individuals to feel less personal responsibility for acting when others are present — each person assumes someone else will intervene.", example:"e.g. Latane & Darley proposed this; Piliavin found limited evidence for it — larger groups were slightly MORE likely to help." },
+  { term:"Bystander Effect", cat:"soc", def:"The phenomenon where individuals are less likely to offer help in an emergency when other people are present.", example:"e.g. Piliavin tested this in a field experiment but found results contrary to simple bystander effect predictions." },
+  { term:"Stooge / Confederate", cat:"soc", def:"A researcher's accomplice who plays the role of another participant but follows a pre-scripted plan unknown to the real participant.", example:"e.g. In Milgram, Mr. Wallace played the 'learner' and always responded identically at each voltage level." },
+  { term:"Prosocial Behaviour", cat:"soc", def:"Any voluntary action intended to benefit another person, such as helping, sharing, or rescuing.", example:"e.g. Piliavin measured prosocial behaviour — whether passengers helped a fallen victim on the subway." },
+  { term:"Modelling (Bystander)", cat:"soc", def:"When a person's willingness to help is influenced by seeing another person (a model) help first.", example:"e.g. Piliavin found a model intervening at 70 seconds led to more subsequent helping than one intervening at 150 seconds." },
+  { term:"Situational Factors", cat:"soc", def:"External factors in the environment or context that influence a person's behaviour — as opposed to personality (dispositional) factors.", example:"e.g. Milgram argued the prestigious Yale setting and lab coat were situational factors increasing obedience." },
+  { term:"Dispositional Factors", cat:"soc", def:"Internal characteristics of the individual — personality, morals, attitudes — that influence behaviour.", example:"e.g. Participants who refused at lower voltages in Milgram may have been expressing dispositional resistance to authority." },
+  // Learning
+  { term:"Learning Approach (Behaviourism)", cat:"learn", def:"The psychological perspective that explains all behaviour as the result of learning through environmental experience — association, reinforcement, or observation.", example:"e.g. Bandura, Fagen, and Saavedra & Silverman all use the learning approach." },
+  { term:"Classical Conditioning", cat:"learn", def:"Learning by association — a neutral stimulus is paired with a stimulus that naturally produces a response, until the neutral stimulus alone produces the response.", example:"e.g. Saavedra & Silverman: buttons (NS) became associated with disgust/fear after the art class accident (UCS)." },
+  { term:"Operant Conditioning", cat:"learn", def:"Learning from the consequences of behaviour — behaviours followed by rewards (reinforcers) are repeated; behaviours followed by punishments are reduced.", example:"e.g. Fagen used operant conditioning (banana reinforcement) to train elephants to perform a trunk wash." },
+  { term:"Positive Reinforcement", cat:"learn", def:"Adding a pleasant stimulus after a behaviour to increase the likelihood of that behaviour being repeated.", example:"e.g. In Fagen, the whistle + banana was a positive reinforcer for the trunk wash sequence." },
+  { term:"Negative Reinforcement", cat:"learn", def:"Removing an unpleasant stimulus after a behaviour to increase the likelihood of that behaviour being repeated. (Not punishment — it increases behaviour.)", example:"e.g. An elephant moving its trunk away from pain (traditional training) — pain removal reinforces the movement." },
+  { term:"Punishment", cat:"learn", def:"A consequence that decreases the likelihood of a behaviour being repeated. Can be positive (adding something unpleasant) or negative (removing something pleasant).", example:"e.g. Traditional elephant training relied on positive punishment — using a sharp bamboo stick to decrease unwanted movement." },
+  { term:"Primary Reinforcer", cat:"learn", def:"A reinforcer that satisfies a biological need directly, such as food, water, or comfort.", example:"e.g. In Fagen, chopped bananas were the primary reinforcer for the elephants." },
+  { term:"Secondary Reinforcer", cat:"learn", def:"A neutral stimulus that becomes reinforcing through repeated pairing with a primary reinforcer.", example:"e.g. In Fagen, the whistle became a secondary reinforcer after being consistently paired with bananas." },
+  { term:"Shaping", cat:"learn", def:"Reinforcing successive approximations of a desired behaviour, gradually working toward the target behaviour.", example:"e.g. Fagen used shaping to train elephants — first rewarding any trunk movement toward the trainer's hand, then progressively requiring more accurate behaviour." },
+  { term:"Behavioural Chaining", cat:"learn", def:"Linking individual behaviours into a sequence by reinforcing each step until the full chain is performed together. Can be forward (first step first) or backward (last step first).", example:"e.g. Fagen used behavioural chaining: trunk in hand → saline instilled → trunk lifted → fluid held → blow out." },
+  { term:"Observational Learning / Social Learning", cat:"learn", def:"Learning by watching the behaviour of others (models) and the consequences they experience — without direct reinforcement of the observer.", example:"e.g. Bandura proposed and demonstrated observational learning: children who saw an aggressive model imitated that aggression." },
+  { term:"Evaluative Conditioning", cat:"learn", def:"A form of classical conditioning where a neutral stimulus becomes positively or negatively evaluated (liked/disliked) through association — without the observer expecting any threat or reward.", example:"e.g. Saavedra & Silverman: the boy's button phobia was maintained by disgust (evaluative conditioning), not just fear (expectancy learning)." },
+  { term:"Expectancy Learning", cat:"learn", def:"A form of classical conditioning where the organism learns to expect a feared outcome — driving fear-based avoidance.", example:"e.g. Watson's Little Albert experiment: Albert expected the white rat to be accompanied by a loud noise." },
+  { term:"Exposure Therapy", cat:"learn", def:"A behavioural treatment for phobias and anxiety in which the patient is gradually and repeatedly exposed to the feared stimulus in a safe context until distress reduces.", example:"e.g. Saavedra & Silverman used in vivo (real-life) graded exposure with buttons across 4 sessions." },
+  { term:"Cognitive Restructuring", cat:"learn", def:"A cognitive-behavioural therapy technique where negative or distorted thoughts are identified and replaced with more balanced, realistic ones.", example:"e.g. Saavedra & Silverman helped the boy replace disgust cognitions about buttons with neutral/positive thoughts." },
+  { term:"Hierarchy of Fears", cat:"learn", def:"A ranked list of feared stimuli from least to most distressing, used in exposure therapy to allow gradual desensitization.", example:"e.g. The button phobia boy rated stimuli from 2 (large denim buttons) to 8 (small clear plastic buttons) on a feelings thermometer." },
+  { term:"Imitation / Modelling", cat:"learn", def:"Copying the behaviour of an observed model. More likely when the model is seen as similar, attractive, or powerful.", example:"e.g. Bandura: children who saw an aggressive model produced both imitative (same acts) and non-imitative (novel gun play) aggression." },
+];
+
+let vocabFilter = "all";
+let vocabSearch = "";
+let currentVocabList = [];
+let currentVocabIdx = 0;
+
+const vcatTagClass = { research:"vtag-research", cog:"vtag-cog", bio:"vtag-bio", soc:"vtag-soc", learn:"vtag-learn", ethics:"vtag-ethics", stats:"vtag-stats" };
+const vcatLabel = { research:"Research Methods", cog:"Cognitive", bio:"Biological", soc:"Social", learn:"Learning", ethics:"Ethics", stats:"Stats & Data" };
+
+function getFilteredVocab() {
+  const q = vocabSearch.toLowerCase();
+  const filtered = VOCAB.filter(v => {
+    const matchCat = vocabFilter === "all" || v.cat === vocabFilter;
+    if (!matchCat) return false;
+    if (!q) return true;
+    return v.term.toLowerCase().includes(q) || v.def.toLowerCase().includes(q) || (v.example && v.example.toLowerCase().includes(q));
+  });
+  const seen = new Set();
+  return filtered.filter(v => { if (seen.has(v.term)) return false; seen.add(v.term); return true; })
+                 .sort((a,b) => a.term.localeCompare(b.term));
+}
+
+function renderVocab() {
+  const grid = document.getElementById("vocabGrid");
+  const noRes = document.getElementById("vocabNoResults");
+  const countEl = document.getElementById("vocabCount");
+  currentVocabList = getFilteredVocab();
+  countEl.textContent = currentVocabList.length + " term" + (currentVocabList.length === 1 ? "" : "s");
+  Array.from(grid.children).forEach(c => { if (!c.classList.contains("vocab-no-results")) c.remove(); });
+  if (currentVocabList.length === 0) { noRes.style.display = "block"; return; }
+  noRes.style.display = "none";
+  currentVocabList.forEach((v, idx) => {
+    const card = document.createElement("div");
+    card.className = "vocab-card";
+    card.innerHTML = `
+      <span class="vocab-cat-tag ${vcatTagClass[v.cat]}">${vcatLabel[v.cat]}</span>
+      <div class="vocab-term">${v.term}</div>
+      <div class="vocab-preview">${v.def}</div>
+      <div class="vocab-card-hint">tap to expand</div>
+    `;
+    card.addEventListener("click", () => openVocabModal(idx));
+    grid.insertBefore(card, noRes);
+  });
+}
+
+function openVocabModal(idx) {
+  currentVocabIdx = idx;
+  renderVocabModal();
+  document.getElementById("vocabModalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function renderVocabModal() {
+  const v = currentVocabList[currentVocabIdx];
+  const total = currentVocabList.length;
+  document.getElementById("vocabModalContent").innerHTML = `
+    <div class="vocab-modal-tag">
+      <span class="vocab-cat-tag ${vcatTagClass[v.cat]}">${vcatLabel[v.cat]}</span>
+    </div>
+    <div class="vocab-modal-term">${v.term}</div>
+    <div class="vocab-modal-label">Definition</div>
+    <div class="vocab-modal-def">${v.def}</div>
+    ${v.example ? `<div class="vocab-modal-label">Exam example</div><div class="vocab-modal-example">${v.example}</div>` : ""}
+    <div class="vocab-modal-nav">
+      <button class="vocab-nav-btn" onclick="navVocab(-1)" ${currentVocabIdx === 0 ? "disabled" : ""}>← Previous</button>
+      <span class="vocab-modal-counter">${currentVocabIdx + 1} / ${total}</span>
+      <button class="vocab-nav-btn" onclick="navVocab(1)" ${currentVocabIdx === total - 1 ? "disabled" : ""}>Next →</button>
+    </div>
+  `;
+}
+
+function navVocab(dir) {
+  const next = currentVocabIdx + dir;
+  if (next >= 0 && next < currentVocabList.length) {
+    currentVocabIdx = next;
+    renderVocabModal();
+  }
+}
+
+function closeVocabModal(e) {
+  if (e.target === document.getElementById("vocabModalOverlay")) closeVocabModalBtn();
+}
+function closeVocabModalBtn() {
+  document.getElementById("vocabModalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", e => {
+  const vOpen = document.getElementById("vocabModalOverlay").classList.contains("open");
+  if (vOpen) {
+    if (e.key === "Escape") closeVocabModalBtn();
+    if (e.key === "ArrowRight") navVocab(1);
+    if (e.key === "ArrowLeft") navVocab(-1);
+  }
+});
+
+document.querySelectorAll(".vocab-cat-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll(".vocab-cat-btn").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+    vocabFilter = this.dataset.vcat;
+    renderVocab();
+  });
+});
+document.getElementById("vocabSearch").addEventListener("input", function() {
+  vocabSearch = this.value;
+  renderVocab();
+});
+
+renderVocab();
+
+</script>
+</body>
+</html>
